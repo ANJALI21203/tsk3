@@ -1,0 +1,151 @@
+---------------------task3.html-------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="styles3.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1>TEMPERATURE CONVERTER</h1>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Temperature Conversion</h2>
+            <div class="converter">
+                <input type="number" id="fahrenheit-input" placeholder="Enter temperature in Fahrenheit (°F)">
+                <label for="unitSelect">Unit Selection:</label>
+                <select id="unitSelect">
+                    <option value="celsius">Celsius (°C)</option>
+                    <option value="kelvin">Kelvin (°K)</option>
+                </select>
+                <button id="convertButton">Convert</button>
+                <p id="result"></p>
+            </div>
+        </div>
+    </main>
+   
+</body>
+</html>
+---------------------------------------styles2.css---------------------
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("tmp.jpg"); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+}
+
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 2px solid rgb(9, 163, 206);
+    
+}
+
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px); 
+}
+
+.container{
+    text-align: center;
+    background:url("tmp2.jpg");
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 50px;
+    width: 300px;
+    border-top: 2px solid rgb(0, 0, 0);
+    border-bottom: 2px solid rgb(0, 0, 0);
+    border-left: 2px solid rgb(0, 0, 0);
+    border-right: 2px solid rgb(0, 0, 0);
+
+}
+.container h2 {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #00e1ff;
+} 
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+p#result {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+button#convertButton {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button#convertButton:hover {
+    background-color: #a100b3;
+}
+
+---------------------------------scipt.js-------------
+document.addEventListener("DOMContentLoaded", function() {
+    const fahrenheitInput = document.getElementById("fahrenheit-input");
+    const unitSelect = document.getElementById("unitSelect");
+    const convertButton = document.getElementById("convertButton");
+    const result = document.getElementById("result");
+    convertButton.addEventListener("click", function() {
+       
+        const temperature = parseFloat(fahrenheitInput.value);
+        const unit = unitSelect.value;
+
+        
+        if (isNaN(temperature)) {
+            displayError("Please Enter A Valid Temperature(in digits).");
+            return;
+        }
+
+        let convertedTemperature;
+        let unitName;
+
+        if (unit === "celsius") {
+            convertedTemperature = (temperature - 32) * 5/9;
+            unitName = "CELCIUS(°C)";
+        } else if (unit === "kelvin") {
+            convertedTemperature = (temperature - 32) * 5/9 + 273.15;
+            unitName = "KELVIN(°K)";
+        } else {
+            displayError("Invalid unit selection.");
+            return;
+        }
+         displayResult(`Converted temperature: ${convertedTemperature.toFixed(2)} ${unitName}`);
+    });
+
+    
+    function displayError(message) {
+        result.textContent = message;
+    }
+
+    function displayResult(message) {
+        result.textContent = message;
+    }
+});
+
+
